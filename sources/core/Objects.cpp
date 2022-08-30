@@ -6,7 +6,7 @@
 /*   By: jtaravel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 11:37:16 by jtaravel          #+#    #+#             */
-/*   Updated: 2022/08/28 22:48:26 by jtaravel         ###   ########.fr       */
+/*   Updated: 2022/08/28 13:44:57 by jtaravel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,10 @@ Objects::Objects(int type)
 	random = rand() % 100 + 1;
 	_c = type;
 	_s = '.';
-	if (random >= 98 && type != LIFE)
+	if (random >= 98)
 	{
 		_s = '0';
 		_c = METEOR;
-	}
-	else if (type == LIFE)
-	{
-		_s = '$';
-		_c = COLOR_RED;
 	}
 	_v = rand() % 3  + 1;
 	_x = rand() % LINES + 1;
@@ -73,8 +68,6 @@ void	ft_spawn_objs(t_data *game)
 
 	(void)game;
 	random = rand() % 100 + 1;
-	if (random == 100)
-		g_objs.push_back(Objects(LIFE));
 	if (random <= 20)
 		g_objs.push_back(Objects(RED_STAR));
 	if (random >= 80)

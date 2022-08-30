@@ -1,0 +1,84 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	//
+Enemy	core/Enemy.cpp	/^Enemy::Enemy(const Enemy &src)$/;"	f	class:Enemy
+Enemy	core/Enemy.cpp	/^Enemy::Enemy(const char &shape):_shape(shape)$/;"	f	class:Enemy
+Enemy	core/Enemy.cpp	/^Enemy::Enemy(int type):_x(0),_y(0)$/;"	f	class:Enemy
+Enemy	core/Enemy.cpp	/^Enemy::Enemy(int x, int y, int type)$/;"	f	class:Enemy
+Enemy	core/Enemy.cpp	/^Enemy::Enemy(void):_x (11+ (rand() % (LINES - 11))),_y (COLS - 1),_dir (ENEMY)$/;"	f	class:Enemy
+Missiles	core/Missiles.cpp	/^Missiles::Missiles(int x, int y)$/;"	f	class:Missiles
+Missiles	core/Missiles.cpp	/^Missiles::Missiles(void)$/;"	f	class:Missiles
+Objects	core/Objects.cpp	/^Objects::Objects(int type)$/;"	f	class:Objects
+Patrol	core/Patrol.cpp	/^Patrol::Patrol(void): Enemy('8')$/;"	f	class:Patrol
+Pusher	core/Pusher.cpp	/^Pusher::Pusher(void): Enemy('<')$/;"	f	class:Pusher
+SpaceShip	core/SpaceShip.cpp	/^SpaceShip::SpaceShip(int x, int y):_x(x),_y(y),_dir(ALLY)$/;"	f	class:SpaceShip
+SpaceShip	core/SpaceShip.cpp	/^SpaceShip::SpaceShip(void):_x(0),_y(0),_dir(ALLY)$/;"	f	class:SpaceShip
+Weapon	core/Weapons.cpp	/^Weapon::Weapon(int x, int y, int dir, char shape): _pm(0), _pm_cost(1)$/;"	f	class:Weapon
+Weapon	core/Weapons.cpp	/^Weapon::Weapon(void): _pm(0),_pm_cost(ALLY_PM)$/;"	f	class:Weapon
+action	core/Enemy.cpp	/^void	Enemy::action(void *&window)$/;"	f	class:Enemy	typeref:typename:void
+action	core/SpaceShip.cpp	/^void	SpaceShip::action(int input, void *&window)$/;"	f	class:SpaceShip	typeref:typename:void
+action	core/SpaceShip.cpp	/^void	SpaceShip::action(void *&window)$/;"	f	class:SpaceShip	typeref:typename:void
+action	core/Weapons.cpp	/^void	Weapon::action(void *&window)$/;"	f	class:Weapon	typeref:typename:void
+aff_obj	core/Objects.cpp	/^void	Objects::aff_obj()$/;"	f	class:Objects	typeref:typename:void
+display	core/Enemy.cpp	/^void	Enemy::display(char shape, void *&window)$/;"	f	class:Enemy	typeref:typename:void
+display	core/Enemy.cpp	/^void	Enemy::display(void *&window)$/;"	f	class:Enemy	typeref:typename:void
+display	core/SpaceShip.cpp	/^void	SpaceShip::display(void *&window)$/;"	f	class:SpaceShip	typeref:typename:void
+ft_aff_ath	core/main.cpp	/^void	ft_aff_ath(void *window, t_data game)$/;"	f	typeref:typename:void
+ft_background	core/main.cpp	/^void	ft_background(void *window)$/;"	f	typeref:typename:void
+ft_game_loop	core/main.cpp	/^int	ft_game_loop(void **window_ref, t_data *game, int loop)$/;"	f	typeref:typename:int
+ft_init_game	core/main.cpp	/^void	ft_init_game(t_data *game)$/;"	f	typeref:typename:void
+ft_init_screen	display/init_ncurse.cpp	/^int	ft_init_screen(void **window)$/;"	f	typeref:typename:int
+ft_menu	core/main.cpp	/^int	ft_menu(WINDOW *window)$/;"	f	typeref:typename:int
+ft_replay	core/main.cpp	/^int	ft_replay(WINDOW *window)$/;"	f	typeref:typename:int
+ft_secure_nodelay	display/init_ncurse.cpp	/^int	ft_secure_nodelay(void **window)$/;"	f	typeref:typename:int
+ft_spawn_mobs	core/spawn_enemies.cpp	/^int	ft_spawn_mobs(t_data *game)$/;"	f	typeref:typename:int
+ft_spawn_objs	core/Objects.cpp	/^void	ft_spawn_objs(t_data *game)$/;"	f	typeref:typename:void
+ft_spawn_phase_1	core/spawn_enemies.cpp	/^int ft_spawn_phase_1(t_data *game)$/;"	f	typeref:typename:int
+ft_spawn_phase_2	core/spawn_enemies.cpp	/^int ft_spawn_phase_2(t_data *game)$/;"	f	typeref:typename:int
+ft_spawn_phase_3	core/spawn_enemies.cpp	/^int ft_spawn_phase_3()$/;"	f	typeref:typename:int
+ft_turn	core/main.cpp	/^int	ft_turn(void *&window, int key, t_data *game)$/;"	f	typeref:typename:int
+g_allies	core/main.cpp	/^std::vector<SpaceShip>	g_allies;$/;"	v	typeref:typename:std::vector<SpaceShip>
+g_missiles	core/main.cpp	/^std::vector<Missiles>	g_missiles;$/;"	v	typeref:typename:std::vector<Missiles>
+g_objs	core/main.cpp	/^std::vector<Objects>	g_objs;$/;"	v	typeref:typename:std::vector<Objects>
+g_patrol	core/main.cpp	/^std::vector<Patrol>	g_patrol;$/;"	v	typeref:typename:std::vector<Patrol>
+g_pusher	core/main.cpp	/^std::vector<Pusher>	g_pusher;$/;"	v	typeref:typename:std::vector<Pusher>
+g_weapon	core/main.cpp	/^std::vector<Weapon>	g_weapon;$/;"	v	typeref:typename:std::vector<Weapon>
+generate_pa_pm	core/Enemy.cpp	/^void	Enemy::generate_pa_pm(void)$/;"	f	class:Enemy	typeref:typename:void
+generate_pm	core/Missiles.cpp	/^void	Missiles::generate_pm(void)$/;"	f	class:Missiles	typeref:typename:void
+generate_pm	core/Weapons.cpp	/^void	Weapon::generate_pm(void)$/;"	f	class:Weapon	typeref:typename:void
+get_C	core/Objects.cpp	/^int	Objects::get_C(void)$/;"	f	class:Objects	typeref:typename:int
+get_S	core/Objects.cpp	/^int	Objects::get_S(void)$/;"	f	class:Objects	typeref:typename:int
+get_X	core/Enemy.cpp	/^int	Enemy::get_X(void) const$/;"	f	class:Enemy	typeref:typename:int
+get_X	core/SpaceShip.cpp	/^int	SpaceShip::get_X(void) const$/;"	f	class:SpaceShip	typeref:typename:int
+get_X_O	core/Objects.cpp	/^int	Objects::get_X_O(void)$/;"	f	class:Objects	typeref:typename:int
+get_Y	core/Enemy.cpp	/^int	Enemy::get_Y(void) const$/;"	f	class:Enemy	typeref:typename:int
+get_Y	core/SpaceShip.cpp	/^int	SpaceShip::get_Y(void) const$/;"	f	class:SpaceShip	typeref:typename:int
+get_Y_O	core/Objects.cpp	/^int	Objects::get_Y_O(void)$/;"	f	class:Objects	typeref:typename:int
+go_front	core/Patrol.cpp	/^void	Patrol::go_front(void *window)$/;"	f	class:Patrol	typeref:typename:void
+movement	core/Enemy.cpp	/^void	Enemy::movement(void)$/;"	f	class:Enemy	typeref:typename:void
+movement	core/Missiles.cpp	/^void	Missiles::movement(void)$/;"	f	class:Missiles	typeref:typename:void
+movement	core/Patrol.cpp	/^void	Patrol::movement(void)$/;"	f	class:Patrol	typeref:typename:void
+movement	core/Pusher.cpp	/^void	Pusher::movement(void)$/;"	f	class:Pusher	typeref:typename:void
+movement	core/SpaceShip.cpp	/^void	SpaceShip::movement(int input)$/;"	f	class:SpaceShip	typeref:typename:void
+movement	core/Weapons.cpp	/^void	Weapon::movement(void)$/;"	f	class:Weapon	typeref:typename:void
+setType	core/Enemy.cpp	/^void	Enemy::setType(int type)$/;"	f	class:Enemy	typeref:typename:void
+set_X	core/Enemy.cpp	/^void	Enemy::set_X(int x)$/;"	f	class:Enemy	typeref:typename:void
+set_X	core/SpaceShip.cpp	/^void	SpaceShip::set_X(int x)$/;"	f	class:SpaceShip	typeref:typename:void
+set_Y	core/Enemy.cpp	/^void	Enemy::set_Y(int y)$/;"	f	class:Enemy	typeref:typename:void
+set_Y	core/SpaceShip.cpp	/^void	SpaceShip::set_Y(int y)$/;"	f	class:SpaceShip	typeref:typename:void
+shoot	core/Enemy.cpp	/^void	Enemy::shoot(void)$/;"	f	class:Enemy	typeref:typename:void
+shoot	core/Patrol.cpp	/^void	Patrol::shoot(void)$/;"	f	class:Patrol	typeref:typename:void
+shoot	core/Pusher.cpp	/^void	Pusher::shoot(void)$/;"	f	class:Pusher	typeref:typename:void
+shoot	core/SpaceShip.cpp	/^void	SpaceShip::shoot(void)$/;"	f	class:SpaceShip	typeref:typename:void
+shoot_action	core/Missiles.cpp	/^void	Missiles::shoot_action(void *&window)$/;"	f	class:Missiles	typeref:typename:void
+~Enemy	core/Enemy.cpp	/^Enemy::~Enemy(void)$/;"	f	class:Enemy
+~Missiles	core/Missiles.cpp	/^Missiles::~Missiles(void)$/;"	f	class:Missiles
+~Objects	core/Objects.cpp	/^Objects::~Objects(void)$/;"	f	class:Objects
+~Patrol	core/Patrol.cpp	/^Patrol::~Patrol(void)$/;"	f	class:Patrol
+~Pusher	core/Pusher.cpp	/^Pusher::~Pusher(void)$/;"	f	class:Pusher
+~SpaceShip	core/SpaceShip.cpp	/^SpaceShip::~SpaceShip(void)$/;"	f	class:SpaceShip
+~Weapon	core/Weapons.cpp	/^Weapon::~Weapon(void)$/;"	f	class:Weapon

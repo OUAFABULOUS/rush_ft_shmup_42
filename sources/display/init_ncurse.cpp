@@ -6,7 +6,7 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 08:52:25 by aweaver           #+#    #+#             */
-/*   Updated: 2022/08/28 19:44:07 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/08/30 13:51:12 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 int	ft_init_screen(void **window)
 {
 	*window = initscr();
+	keypad(stdscr, TRUE);
 	if (*window == NULL)
 		return (1);
 	if (raw() || noecho()

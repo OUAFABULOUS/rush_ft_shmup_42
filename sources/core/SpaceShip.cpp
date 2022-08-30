@@ -6,7 +6,7 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 11:04:04 by jtaravel          #+#    #+#             */
-/*   Updated: 2022/08/28 21:45:43 by jtaravel         ###   ########.fr       */
+/*   Updated: 2022/08/30 13:49:40 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	SpaceShip::movement(int input)
 
 void	SpaceShip::display(void *&window)
 {
-	mvwaddch((WINDOW *)window, this->_x, this->_y, this->_shape | COLOR_PAIR(5) | A_BOLD);
+	mvwprintw((WINDOW *)window, this->_x, this->_y, "%c", this->_shape);
 }
 
 void	SpaceShip::action(void *&window)

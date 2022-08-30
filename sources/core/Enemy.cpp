@@ -6,7 +6,7 @@
 /*   By: jtaravel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 12:25:52 by jtaravel          #+#    #+#             */
-/*   Updated: 2022/08/28 21:44:19 by jtaravel         ###   ########.fr       */
+/*   Updated: 2022/08/28 23:05:34 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,12 @@ void	Enemy::shoot(void)
 
 void	Enemy::display(void *&window)
 {
-	mvwaddch((WINDOW *)window, this->_x, this->_y, _shape | COLOR_PAIR(4) | A_BOLD);
+	mvwprintw((WINDOW *)window, this->_x, this->_y, "%c", _shape);
 }
 
 void	Enemy::display(char shape, void *&window)
 {
-	mvwaddch((WINDOW *)window, this->_x, this->_y, shape | COLOR_PAIR(RED_STAR) | A_BOLD);
+	mvwprintw((WINDOW *)window, this->_x, this->_y, "%c", shape);
 }
 
 void	Enemy::action(void *&window)

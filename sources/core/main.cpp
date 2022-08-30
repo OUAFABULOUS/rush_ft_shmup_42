@@ -6,7 +6,7 @@
 /*   By: omoudni <omoudni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 22:09:33 by aweaver           #+#    #+#             */
-/*   Updated: 2022/08/28 23:33:22 by jtaravel         ###   ########.fr       */
+/*   Updated: 2022/08/30 13:49:31 by omoudni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,43 +24,63 @@ std::vector<Missiles>	g_missiles;
 std::vector<Objects>	g_objs;
 std::vector<Patrol>	g_patrol;
 
-int	ft_background(void *window, t_data *game)
+void	ft_background(void *window)
 {
+//	clear();
 	for (size_t i = 0; i < g_objs.size(); i++)
 	{
 		g_objs[i].aff_obj();
-		if (g_objs[i].get_S() == '$' && g_objs[i].get_X_O() == g_allies[0].get_X() && g_objs[i].get_Y_O() == g_allies[0].get_Y()
-			&& !game->mode)
-		{
-			if (game->hp < 3) 
-				game->hp++;
-		}
-		if (g_objs[i].get_C() == METEOR && g_objs[i].get_X_O() == g_allies[0].get_X() && g_objs[i].get_Y_O() == g_allies[0].get_Y()
-			&& game->mode)
-			return (1);
 		mvwaddch((WINDOW *)window, g_objs[i].get_X_O(), g_objs[i].get_Y_O(), g_objs[i].get_S() | COLOR_PAIR(g_objs[i].get_C() | A_BOLD));
 	}
+}
+
+int	ft_replay(WINDOW *window)
+{
+	erase();
+	int	ch;
+
+	cbreak();
+	mvwprintw(window, LINES / 2 - 5, COLS / 2 - 31, GO_0);
+	mvwprintw(window, LINES / 2 - 4, COLS / 2 - 31, GO_1);
+	mvwprintw(window, LINES / 2 - 3, COLS / 2 - 31, GO_2);
+	mvwprintw(window, LINES / 2 - 2, COLS / 2 - 31, GO_3);
+	mvwprintw(window, LINES / 2 - 1, COLS / 2 - 31, GO_4);
+	mvwprintw(window, LINES / 2, COLS / 2 - 31, GO_5);
+	mvwprintw(window, LINES / 2 + 1, COLS / 2 - 31, GO_6);
+	mvwprintw(window, LINES / 2 + 2, COLS / 2 - 31, GO_7);
+	mvwprintw(window, LINES / 2 + 3, COLS / 2 - 31, GO_8);
+	mvwprintw(window, LINES / 2 + 4, COLS / 2 - 31, GO_9);
+	mvwprintw(window, LINES - 3, COLS - 30,"press ENTER to play again");
 	refresh();
-	return (0);
+	mvwprintw(window, LINES - 2, COLS - 30,"press ESC to quit");
+	refresh();
+	while ((ch = getch()))
+	{
+		if (ch == KEY_ESC)
+			return (-1);
+		if (ch == 10)
+			return (1);
+	}
+	return (1);
+
 }
 
 int	ft_turn(void *&window, int key, t_data *game)
 {
-	erase();
+	clear();
 	for (size_t i = 0; i < g_allies.size(); i++)
 	{
 		g_allies[i].action(key, window);
 		for (size_t i = 0; i < g_pusher.size(); i++)
 		{
-			if ((g_allies[0].get_Y() == g_pusher[i].get_Y() && g_pusher[i].get_X() == g_allies[0].get_X())
-				|| (game->mode && g_pusher[i].get_Y() <= 0))
-				return (1);
+			if (g_allies[0].get_Y() == g_pusher[i].get_Y() && g_pusher[i].get_X() == g_allies[0].get_X())
+				return(ft_replay((WINDOW *)(window)));
 			g_pusher[i].action(window);
 		}
 		for (size_t i = 0; i < g_patrol.size(); i++)
 		{
 			if (g_allies[0].get_Y() == g_patrol[i].get_Y() && g_patrol[i].get_X() == g_allies[0].get_X())
-				return (1);
+				return(ft_replay((WINDOW *)(window)));
 			g_patrol[i].action(window);
 			if ((game->loop % (60 * 4) == 0))
 				g_patrol[i].go_front(window);
@@ -75,7 +95,7 @@ int	ft_turn(void *&window, int key, t_data *game)
 			{
 				g_weapon.erase(g_weapon.begin() + j);
 				g_pusher.erase(g_pusher.begin() + j);
-				game->score += PUSHER_POINT;
+				game->score += 5;
 				game->frags += 1;
 			}
 		}
@@ -85,7 +105,7 @@ int	ft_turn(void *&window, int key, t_data *game)
 			{
 				g_weapon.erase(g_weapon.begin() + j);
 				g_patrol.erase(g_patrol.begin() + j);
-				game->score += PATROL_POINT;
+				game->score += 10;
 				game->frags += 1;
 			}
 		}
@@ -94,42 +114,47 @@ int	ft_turn(void *&window, int key, t_data *game)
 	{
 		g_missiles[i].shoot_action(window);
 		if (g_allies[0].get_Y() == g_missiles[i].get_Y() && g_missiles[i].get_X() == g_allies[0].get_X())
-		{
-			game->hp--;
-			g_missiles.erase(g_missiles.begin() + i);
-		}
-		if (game->hp <= 0)
-			return (1);
-		for (size_t j = 0; j < g_weapon.size(); j++)
-		{
-			if (g_weapon[j].get_Y() == g_missiles[i].get_Y() && g_missiles[i].get_X() == g_weapon[j].get_X())
-			{
-				g_weapon.erase(g_weapon.begin() + j);
-				g_missiles.erase(g_missiles.begin() + i);
-				game->score += BULLET_POINT;
-			}
-		}
-		
+			return(ft_replay((WINDOW *)(window)));
 	}
 	wrefresh((WINDOW *)window);
 	return (0);
 }
 
+int	ft_menu(WINDOW *window)
+{
+	erase();
+	int	ch;
+
+	cbreak();
+	mvwprintw((WINDOW *)window, 0, COLS / 2 - 29, FT_S0);
+	mvwprintw((WINDOW *)window, 1, COLS / 2 - 29, FT_S1);
+	mvwprintw((WINDOW *)window, 2, COLS / 2 - 29, FT_S2);
+	mvwprintw((WINDOW *)window, 3, COLS / 2 - 29, FT_S3);
+	mvwprintw((WINDOW *)window, 4, COLS / 2 - 29, FT_S4);
+	mvwprintw((WINDOW *)window, 5, COLS / 2 - 29, FT_S5);
+	mvwprintw((WINDOW *)window, 6, COLS / 2 - 29, FT_S6);
+	mvwprintw((WINDOW *)window, 7, COLS / 2 - 29, FT_S7);
+	mvwprintw((WINDOW *)window, LINES / 2, COLS / 2 - 12,"press ENTER to continue");
+	mvwprintw((WINDOW *)window, LINES / 2 + 1, COLS / 2 - 12,"press ESC to quit");
+	refresh();
+	while ((ch = getch()))
+	{
+		if (ch == KEY_ESC)
+			return (-1);
+		if (ch == 10)
+			return (0);
+	}
+	return (0);
+}
+
 void	ft_aff_ath(void *window, t_data game)
 {
-	const char *str2 = "NORMAL";
-	const char *str3 = "HARDMODE";
 	for (int i = 0; i <= COLS; i++)
 		mvwprintw((WINDOW *)window, 10, i, "_");
 	mvwprintw((WINDOW *)window, 5, 20, "Level Phase: %d\n", game.phase);
 	mvwprintw((WINDOW *)window, 6, 20, "Frags: %d\n", game.frags);
-	mvwprintw((WINDOW *)window, 5, 60, "SCORE: %d\n", game.score);
-	mvwprintw((WINDOW *)window, 5, 80, "HP: %d\n", game.hp);
-	if (game.mode == 1)
-		mvwprintw((WINDOW *)window, 6, 80, "MODE: %s\n", str3);
-	else
-		mvwprintw((WINDOW *)window, 6, 80, "MODE: %s\n", str2);
-	int w = 60;
+	mvwprintw((WINDOW *)window, 7, 20, "Score: %d\n", game.score);
+	int w = COLS / 2 - 6;
 	const char *str = "CPP INVADER\n";
 	for (int j = 0; j <= 11; j++)
 	{
@@ -139,89 +164,82 @@ void	ft_aff_ath(void *window, t_data game)
 
 }
 
-int	main(void)
+void	ft_init_game(t_data *game)
 {
-	void		*window;
+	game->loop = 0;
+	game->phase = 1;
+	game->score = 0;
+	game->frags = 0;
+}
+
+int	ft_game_loop(void **window_ref, t_data *game, int loop)
+{
 	int		key;
 	int		x;
 	int		y;
-	int		lost;
-	t_data	game;
+	void	*window;
+	(void)loop;
 
-	window = NULL;
+	window = *window_ref;
 	x = 10;
 	y = 10;
 	key = 0;
-	lost = 0;
 	std::srand(time(NULL));
+	if (!loop)
+	{
 	if (ft_init_screen(&window) == 1)
 		return (0);
-	g_allies.emplace_back(SpaceShip(20, 20));
 	start_color();
 	init_pair(1, COLOR_RED, COLOR_BLACK);
 	init_pair(2, COLOR_YELLOW, COLOR_BLACK);
 	init_pair(3, COLOR_BLUE, COLOR_BLACK);
-	init_pair(4, COLOR_MAGENTA, COLOR_BLACK);
-	init_pair(5, COLOR_GREEN, COLOR_BLACK);
-
+	}
+	g_allies.emplace_back(SpaceShip(20, 20));
 	Objects objs(STAR);
-	game.loop = 0;
-	game.phase = 1;
-	game.score = 0;
-	game.frags = 0;
-	game.hp = HP;
-	game.mode = 0;
-	if (ft_menu(window, &game))
+	if (ft_menu((WINDOW *)window))
 		return (endwin(), 0);
+	erase();
 	ft_secure_nodelay(&window);
+	ft_init_game(game);
 	while (1)
 	{
 		ft_spawn_mobs(game);
-		ft_spawn_objs(&game);
-		if (ft_turn(window, key, &game))
-		{
-			lost = 1;
-			break;
-		}
-		if (ft_background(window, &game))
-		{
-			lost = 1;
-			break;
-		}
-		if (game.score > 5000)
-			break;
-		ft_aff_ath(window, game);
+		ft_spawn_objs(game);
+		int	ft_turne = ft_turn(window, key, game);
+		if (ft_turne == -1)
+			return (0);
+		else if (ft_turne == 1)
+			break ;
+//		else
+//			break;
+//		if (ft_turn(window, key, game) == 1)
+//			break ;
+		ft_background(window);
+		ft_aff_ath(window, *game);
 		key = getch();
 		if (key == KEY_ESC || key == 3)
-			break;
+			exit (1);
 		wrefresh((WINDOW *)window);
 		std::this_thread::sleep_for(std::chrono::duration<double, std::ratio<1,60>>(1));
-		game.loop++;
-		if (game.score >= 250)
-			game.phase = 2;
-		if (game.score >= 750)
-		{
-			game.mode = 1;
-			game.phase = 3;
-		}
-		refresh();
+		(game->loop)++;
 	}
+	g_allies.clear();
+	g_objs.clear();
+	g_weapon.clear();
+	g_pusher.clear();
+	g_missiles.clear();
+	g_patrol.clear();
+	ft_game_loop(&window, game, 1);
+	return (0);
+}
+
+int	main(void)
+{
+	void		*window;
+	t_data	game;
+	window = NULL;
+
+	ft_game_loop(&window , &game, 0);
 	endwin();
-	if (lost == 1)
-	{
-		std::cout << std::endl;
-		std::cout << std::endl;
-		std::cout << "				YOU LOST WITH A SCORE OF " << game.score << " AND " << game.frags << " ENEMY KILLED" << std::endl;
-		std::cout << std::endl;
-		std::cout << std::endl;
-	}
-	else if (game.score > 5000)
-	{
-		std::cout << std::endl;
-		std::cout << std::endl;
-		std::cout << "				YOU WIN WITH A SCORE OF " << game.score << " AND " << game.frags << " ENEMY KILLED" << std::endl;
-		std::cout << std::endl;
-		std::cout << std::endl;
-	}
 	return 0;
 }
